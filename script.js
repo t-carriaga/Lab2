@@ -22,7 +22,7 @@ map.on('load', () => {
 const popup = new mapboxgl.Popup({ closeOnClick: false })
     .setLngLat([14, 5])
     .setHTML(
-                '<h1>African Countries and Capital Cities</h1><p>Hover Above Each Country to learn their Names!</p>')
+                '<h1>Learn the Name of Countries in Africa!</h1><p>Hover above each country to learn their names, then test your memory! The Red Markers are the location of Capital Cities!</p>')
     .addTo(map);
 
 //Adds Global Capital City Points Data
