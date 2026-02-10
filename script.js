@@ -28,13 +28,13 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
 //Adds Global Capital City Points Data
  map.addSource('Capital-Cities', {
         type: 'geojson',
-        data: 'https://t-carriaga.github.io/Lab2/main/data/Capital_Cities.geojson',
+        data: 'https://raw.githubusercontent.com/t-carriaga/Lab2/main/data/Capital_Cities.geojson',
     });
 
 //Adds Country Point Data
  map.addSource('Countries', {
         type: 'geojson',
-        data: 'https://t-carriaga.github.io/Lab2/main/data/Africa_Boundaries.geojson',
+        data: 'https://raw.githubusercontent.com/t-carriaga/Lab2/main/data/Africa_Boundaries.geojson',
         promoteId: 'OBJECTID'
     });
 
