@@ -25,10 +25,10 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
                 '<h1>African Countries and Capital Cities</h1><p>Hover Above Each Country to learn their Names!</p>')
     .addTo(map);
 
-//Adds Capital City Points Data
+//Adds Global Capital City Points Data
  map.addSource('Capital-Cities', {
         type: 'geojson',
-        data: 'https://raw.githubusercontent.com/t-carriaga/Lab2/main/data/World_Cities.geojson',
+        data: 'https://raw.githubusercontent.com/t-carriaga/Lab2/main/data/Capital_Cities.geojson',
         // Format for raw data link in online repo whilst still working on website - 'https://raw.githubusercontent.com/yourusername/respoitoryname/main/yourfile.geojson'
         // Update to following format once website is published - //'https://yourusername.github.io/repositoryname/yourfile.geojson'
     });
@@ -68,6 +68,7 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
                     ['boolean', ['feature-state', 'hover'], false],
                     1,
                     0.25 // This Boolean will set up the change the opacity of the circle when hovered t
+                    //Adapted From: https://docs.mapbox.com/mapbox-gl-js/example/hover-styles/
                 ]
         }
     });
@@ -85,7 +86,6 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
     });
 
     //3. DETECT WHEN MOUSE HOVERS COUNTRY
-
          // Identifies whey mouse cursor is above a country, then changes "hoveredPolygonId" to change opacity later
         map.on('mousemove', 'Countries-fills', (e) => {
     if (e.features.length > 0) {
@@ -114,6 +114,7 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
     });
 
     // 4. VISUALIZE COUNTRY HOVERS
+        //Shows Change In Opacity When Hovered
         map.on('mousemove', 'Countries-fills', (e) => {
         if (e.features.length > 0) {
         if (hoveredPolygonId !== null) {
@@ -130,6 +131,7 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
         }
         });
 
+        //Shows Return to Normal Opacity
         map.on('mouseleave', 'Countries-fills', () => {
         if (hoveredPolygonId !== null) {
             map.setFeatureState(
@@ -140,6 +142,8 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
         hoveredPolygonId = null;
         });
 
+        //Shows Country Label
+        // Adapted From: https://docs.mapbox.com/mapbox-gl-js/example/hover-tooltip/
         map.addInteraction('Country-fills-mousemove', {
         type: 'mousemove',
         target: {
@@ -156,7 +160,7 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
             }
         });
 
-        // Use a standard Mapbox GL JS event listener for mouseleave to hide the popup
+        // Remove Vountry Label
         map.on('mouseleave', 'Countries-fills', () => {
             Country_popup.remove();
         });
