@@ -11,14 +11,7 @@ const Country_popup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
     offset: [0, -20]
-});
-
-const Cities_popup = new mapboxgl.Popup({
-    closeButton: false,
-    closeOnClick: false,
-    offset: [0, -20]
-});
-
+})
 
 let hoveredPolygonId = null;
 
