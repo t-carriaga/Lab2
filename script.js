@@ -2,7 +2,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoidGNhcnJpYWdhIiwiYSI6ImNta3lqMmN0YTA3eTMzZm9qa
 
 const map = new mapboxgl.Map({
 	container: 'my-map', // map container ID
-	style: 'mapbox://styles/tcarriaga/cml8ikct8000f01sagb0iebdc', // style URL
+	style: 'mapbox://styles/tcarriaga/cml8ikct8000f01sagb0iebdc', // style URL; This was designed to be a simple; distinguishing land and sea - and removed labels to cohere with site's intended use: learning the names and placements of Countries in Africa
 	center: [14, 5], // starting position [lng, lat]
 	zoom: 2, // starting zoom
 });
@@ -28,18 +28,14 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
 //Adds Global Capital City Points Data
  map.addSource('Capital-Cities', {
         type: 'geojson',
-        data: 'https://raw.githubusercontent.com/t-carriaga/Lab2/main/data/Capital_Cities.geojson',
-        // Format for raw data link in online repo whilst still working on website - 'https://raw.githubusercontent.com/yourusername/respoitoryname/main/yourfile.geojson'
-        // Update to following format once website is published - //'https://yourusername.github.io/repositoryname/yourfile.geojson'
+        data: 'https://t-carriaga.github.io/Lab2/main/data/Capital_Cities.geojson',
     });
 
 //Adds Country Point Data
  map.addSource('Countries', {
         type: 'geojson',
-        data: 'https://raw.githubusercontent.com/t-carriaga/Lab2/main/data/Africa_Boundaries.geojson',
+        data: 'https://t-carriaga.github.io/Lab2/main/data/Africa_Boundaries.geojson',
         promoteId: 'OBJECTID'
-        // Format for raw data link in online repo whilst still working on website - 'https://raw.githubusercontent.com/yourusername/respoitoryname/main/yourfile.geojson'
-        // Update to following format once website is published - //'https://yourusername.github.io/repositoryname/yourfile.geojson'
     });
 
 // 2. VISUALIZE DATA LAYERS
