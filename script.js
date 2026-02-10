@@ -7,6 +7,7 @@ const map = new mapboxgl.Map({
 	zoom: 2, // starting zoom
 });
 
+//Pop Up Set Up
 const Country_popup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
@@ -17,20 +18,22 @@ let hoveredPolygonId = null;
 
 map.on('load', () => {
 
+ //Opens Pop up when website is launched   
 const popup = new mapboxgl.Popup({ closeOnClick: false })
     .setLngLat([14, 5])
     .setHTML(
                 '<h1>African Countries and Capital Cities</h1><p>Hover Above Each Country to learn their Names!</p>')
     .addTo(map);
 
+//Adds Capital City Points Data
  map.addSource('Capital-Cities', {
         type: 'geojson',
-        data: 'https://raw.githubusercontent.com/t-carriaga/Lab2/main/data/World_Cities4.geojson',
-        promoteId: 'OBJECTID'
+        data: 'https://raw.githubusercontent.com/t-carriaga/Lab2/main/data/World_Cities.geojson',
         // Format for raw data link in online repo whilst still working on website - 'https://raw.githubusercontent.com/yourusername/respoitoryname/main/yourfile.geojson'
         // Update to following format once website is published - //'https://yourusername.github.io/repositoryname/yourfile.geojson'
     });
 
+//Adds Country Point Data
  map.addSource('Countries', {
         type: 'geojson',
         data: 'https://raw.githubusercontent.com/t-carriaga/Lab2/main/data/Africa_Boundaries.geojson',
@@ -40,6 +43,7 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
     });
 
 // 2. VISUALIZE DATA LAYERS
+    // Visualizes City Points
     map.addLayer({
         id: 'Cities-Circles',
         type: 'circle',
@@ -51,7 +55,7 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
             "circle-stroke-width": 2,
         }
     });
-
+    // Visualizes Country Polygons
     map.addLayer({
         id: 'Countries-fills',
         type: 'fill',
@@ -63,11 +67,12 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
                     'case',
                     ['boolean', ['feature-state', 'hover'], false],
                     1,
-                    0.25
+                    0.25 // This Boolean will set up the change the opacity of the circle when hovered t
                 ]
         }
     });
 
+    // Visualizes Country Borders
     map.addLayer({
         'id': 'Countries-borders',
         'type': 'line',
@@ -79,6 +84,9 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
         }
     });
 
+    //3. DETECT WHEN MOUSE HOVERS COUNTRY
+
+         // Identifies whey mouse cursor is above a country, then changes "hoveredPolygonId" to change opacity later
         map.on('mousemove', 'Countries-fills', (e) => {
     if (e.features.length > 0) {
         if (hoveredPolygonId !== null) {
@@ -94,7 +102,7 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
         );
     }
     });
-
+        //When the cursor crosess a border to a new country, returns  "hoveredPolygonId" to normal
         map.on('mouseleave', 'Countries-fills', () => {
         if (hoveredPolygonId !== null) {
             map.setFeatureState(
@@ -105,23 +113,7 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
         }
     });
 
-    // 3. VISUALIZE COUNTRY HOVERS
-        map.addInteraction('Country-fills-mousemove', {
-        type: 'mousemove',
-        target: {
-            layerId: 'Countries-fills'
-            },
-            handler: (e) => {
-                // Position the popup at the cursor location and show it
-                Country_popup
-                    .setLngLat(e.lngLat)
-                    .setHTML(
-                        `<strong>${e.feature.properties.NAME_0}</strong>`
-                    )
-                    .addTo(map);
-            }
-        });
-
+    // 4. VISUALIZE COUNTRY HOVERS
         map.on('mousemove', 'Countries-fills', (e) => {
         if (e.features.length > 0) {
         if (hoveredPolygonId !== null) {
