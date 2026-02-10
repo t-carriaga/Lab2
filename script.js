@@ -25,7 +25,7 @@ const popup = new mapboxgl.Popup({ closeOnClick: false })
 
  map.addSource('Capital-Cities', {
         type: 'geojson',
-        data: 'https://raw.githubusercontent.com/t-carriaga/Lab2/main/data/World_Cities.geojson',
+        data: 'https://raw.githubusercontent.com/t-carriaga/Lab2/main/data/World_Cities1.geojson',
         promoteId: 'OBJECTID'
         // Format for raw data link in online repo whilst still working on website - 'https://raw.githubusercontent.com/yourusername/respoitoryname/main/yourfile.geojson'
         // Update to following format once website is published - //'https://yourusername.github.io/repositoryname/yourfile.geojson'
